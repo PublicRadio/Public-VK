@@ -1,0 +1,5 @@
+/lib/
+.gitignore
+.flowconfig
+/test/
+/coverage/
