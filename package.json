@@ -1,10 +1,10 @@
 {
   "name": "public-vk-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepublish": "cp ./lib/index.js ./index.es6.js; ./node_modules/.bin/babel ./lib/index.js > ./index.js"
+    "prepublish": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +14,9 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicRadio/public-vk-api"
   }
 }
