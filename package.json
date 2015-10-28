@@ -1,20 +1,32 @@
 {
   "name": "public-vk-api",
   "version": "0.0.1",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "prepublish": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline"
+    "test": "echo \"no tests implemented\"",
+    "build": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline",
+    "prepublish": "npm run build",
+    "semantic-release": ""
   },
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": ">=0.10"
+  },
   "devDependencies": {
     "babel": "^5.8.29",
-    "flow-bin": "^0.18.1"
+    "semantic-release": "^4.3.5"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.0"
   },
+  "description": "VK.com Public Api - unofficial implementation for Public Radio project. Provides simple, fast and safe way to call VK methods",
+  "author": "Vsevolod Rodionov <vsevolod.rodionov@gmail.com>",
+  "homepage": "https://github.com/PublicRadio/public-vk-api",
+  "keywords": [
+    "vk",
+    "api",
+    "publicradio"
+  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/PublicRadio/public-vk-api"

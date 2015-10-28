@@ -3,3 +3,4 @@
 /coverage/
 .gitignore
 .flowconfig
+.travis.yml
