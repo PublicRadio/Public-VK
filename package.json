@@ -1,7 +1,7 @@
 {
   "name": "public-vk-api",
   "version": "0.0.4",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest --verbose",
     "build": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline",
