@@ -1,6 +1,6 @@
 jest.autoMockOff()
-jest.dontMock('babel/polyfill')
-require('babel/polyfill')
+jest.dontMock('babel-polyfill')
+require('babel-polyfill')
 jest.autoMockOn()
 jest.dontMock('../lib/index.js')
 jest.dontMock('../lib/QueryRunner.js')
@@ -14,14 +14,22 @@ const {Query} = require('../lib/QueryRunner.js')
 
 const jsonContents = JSON.stringify({v: Query.v})
 const app_id = 12345
+const sid = app_id
 
 const getLastFetchCall = () => fetch.mock.calls[fetch.mock.calls.length - 1]
-const expectLastFetchCall = () => expect(getLastFetchCall())
+const expectLastFetchCall = () => expect(getLastFetchCall()[0])
 const mockResponseWithJson = (response = '') => {
     const json = jest.genMockFn()
     fetch.mockReturnValue(Promise.resolve({json}))
     json.mockReturnValue(Promise.resolve({response}))
 }
+const checkExecuteCall = (queryString) =>
+    expectLastFetchCall()
+        .toEqual('https://api.vk.com/method/execute?' +
+            'access_token=' + app_id +
+            '&code=' +
+            encodeURIComponent('var results=[],result;' + queryString + 'return results;') +
+            '&v=' + Query.v)
 
 describe('VK Api', () => {
     describe('unauthorized instance', () => {
@@ -29,7 +37,7 @@ describe('VK Api', () => {
         it('should perform non-authenticated call to VK', () => {
             vk.call('foo', {bar: 'baz'})
             jest.runAllTimers()
-            expect(getLastFetchCall()[0]).toEqual('https://api.vk.com/method/foo?bar=baz&v=' + Query.v)
+            expectLastFetchCall().toEqual('https://api.vk.com/method/foo?bar=baz&v=' + Query.v)
         })
         it('should pass the response', () => {
             mockResponseWithJson({a: 'b'})
@@ -41,22 +49,15 @@ describe('VK Api', () => {
     })
     describe('authorized instance', () => {
         it('should perform authenticated call to VK', () => {
-            const sid = app_id
             Object.assign(new VK(app_id), {sid}).call('')
             jest.runAllTimers()
-            expect(getLastFetchCall()[0]).toEqual('https://api.vk.com/method/?access_token=' + sid + '&v=' + Query.v)
+            expectLastFetchCall().toEqual('https://api.vk.com/method/?access_token=' + sid + '&v=' + Query.v)
         })
     })
     describe('bunched calls', () => {
         const vk = new VK(app_id)
         vk.sid = app_id
-        const checkExecuteCall = (queryString) =>
-            expect(getLastFetchCall()[0])
-                .toEqual('https://api.vk.com/method/execute?' +
-                    'access_token=' + app_id +
-                    '&code=' +
-                    encodeURIComponent('var results=[],result;' + queryString + 'return results;') +
-                    '&v=' + Query.v)
+
         it('should merge multiple requests', () => {
             vk.call('1', {})
             vk.call('2', {})
