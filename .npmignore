@@ -4,3 +4,4 @@
 .gitignore
 .flowconfig
 .travis.yml
+.idea
