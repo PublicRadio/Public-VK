@@ -22,6 +22,7 @@
     "semantic-release": "^4.3.5"
   },
   "dependencies": {
+    "crosstab": "^0.2.11",
     "isomorphic-fetch": "^2.2.0"
   },
   "description": "VK.com Public Api - unofficial implementation for Public Radio project. Provides simple, fast and safe way to call VK methods",
