@@ -1,11 +1,11 @@
 {
   "name": "public-vk-api",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "main": "dist/index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest --verbose",
     "build": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline",
-    "prepublish": "npm run build",
+    "prepublish": "npm run test && npm run build",
     "semantic-release": ""
   },
   "jest": {

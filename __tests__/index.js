@@ -29,7 +29,7 @@ describe('VK Api', () => {
         it('should perform non-authenticated call to VK', () => {
             vk.call('foo', {bar: 'baz'})
             jest.runAllTimers()
-            expectLastFetchCall().toEqual('https://api.vk.com/method/foo?bar=baz&v=' + Query.v)
+            expect(getLastFetchCall()[0]).toEqual('https://api.vk.com/method/foo?bar=baz&v=' + Query.v)
         })
         it('should pass the response', () => {
             mockResponseWithJson({a: 'b'})
