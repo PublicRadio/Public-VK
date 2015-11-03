@@ -1,6 +1,6 @@
 jest.autoMockOff()
-jest.dontMock('babel-polyfill')
-require('babel-polyfill')
+jest.dontMock('babel/polyfill')
+require('babel/polyfill')
 jest.autoMockOn()
 jest.dontMock('../lib/index.js')
 jest.dontMock('../lib/QueryRunner.js')
