@@ -5,3 +5,4 @@
 .flowconfig
 .travis.yml
 .idea
+.babelrc
