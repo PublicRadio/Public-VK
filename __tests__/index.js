@@ -19,7 +19,7 @@ VK.prototype.getLoginStatus = jest.genMockFn()
 
 const jsonContents = JSON.stringify({v: Query.v})
 const app_id = 12345
-const sid = app_id
+const access_token = app_id
 
 const getLastFetchCall = () => fetch.mock.calls[fetch.mock.calls.length - 1]
 const expectLastFetchCall = () => expect(getLastFetchCall()[0])
@@ -54,14 +54,14 @@ describe('VK Api', () => {
     })
     describe('authorized instance', () => {
         it('should perform authenticated call to VK', () => {
-            Object.assign(new VK(app_id), {sid}).call('')
+            Object.assign(new VK(app_id), {access_token}).call('')
             jest.runAllTimers()
-            expectLastFetchCall().toEqual('https://api.vk.com/method/?access_token=' + sid + '&v=' + Query.v)
+            expectLastFetchCall().toEqual('https://api.vk.com/method/?access_token=' + access_token + '&v=' + Query.v)
         })
     })
     describe('bunched calls', () => {
         const vk = new VK(app_id)
-        vk.sid = app_id
+        vk.access_token = app_id
 
         it('should merge multiple requests', () => {
             vk.call('1', {})
