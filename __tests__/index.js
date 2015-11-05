@@ -1,3 +1,5 @@
+const global = (0, eval)('this')
+Object.assign(global, {window: global, document: {}})
 jest.autoMockOff()
 jest.dontMock('babel/polyfill')
 require('babel/polyfill')
@@ -11,6 +13,8 @@ jest.setMock('isomorphic-fetch', fetch)
 
 const {VK} = require('../lib/index.js')
 const {Query} = require('../lib/QueryRunner.js')
+
+VK.prototype.getLoginStatus = jest.genMockFn()
 
 const jsonContents = JSON.stringify({v: Query.v})
 const app_id = 12345
