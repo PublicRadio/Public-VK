@@ -1,3 +1,4 @@
+//noinspection CommaExpressionJS
 const global = (0, eval)('this')
 Object.assign(global, {window: global, document: {}})
 jest.autoMockOff()
